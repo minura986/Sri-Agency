@@ -1,0 +1,549 @@
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
+:root {
+  --primary-color: #8B1E3F; /* Maroon */
+  --accent-color: #FBB03B;  /* Yellow */
+  --text-light: #ffffff;
+  --text-dark: #333333;
+  --bg-gray: #E5E5E5;
+  --card-dark: #444444;
+  --footer-bg: #2C2C2C;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-gray);
+  color: var(--text-dark);
+}
+
+/* Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  color: var(--primary-color);
+  margin-bottom: 40px;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  text-align: center;
+}
+
+.btn {
+  background-color: var(--accent-color);
+  color: var(--text-dark);
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s ease, background-color 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  background-color: #e59e2b;
+}
+
+/* =========================================
+   2. NAVBAR
+   ========================================= */
+.navbar {
+  background-color: var(--primary-color);
+  padding: 1rem 0;
+  /* FIXED: Removed 'position: relative' that was overwriting sticky */
+  position: sticky; 
+  top: 0;
+  z-index: 1000;
+  border-bottom: 4px solid var(--accent-color);
+  overflow: hidden; /* Ensures stripes don't spill out */
+}
+
+/* --- NEW STRIPES CSS --- */
+.nav-stripes {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  z-index: 1001; 
+}
+
+.stripe-green {
+  width: 35px;
+  background-color: #007A3D;
+  height: 100%;
+}
+
+.stripe-orange {
+  width: 35px;
+  background-color: #FF6F00;
+  height: 100%;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1002; /* Ensures content stays clickable above stripes */
+}
+
+/* Logo Styles */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.logo img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo span {
+  color: var(--accent-color);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links span, 
+.nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.nav-links span:hover,
+.nav-links a:hover {
+  color: var(--accent-color);
+}
+
+.nav-buttons button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-buttons button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* =========================================
+   3. HERO SECTION
+   ========================================= */
+.hero {
+  height: 85vh;
+  background-color: #333; 
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--text-light);
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.hero p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+/* =========================================
+   4. ABOUT SECTION
+   ========================================= */
+.about {
+  padding: 80px 0;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.about-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 20px 20px 0px var(--accent-color);
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.highlight-text {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.stats-grid {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.stat-item h3 {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 5px;
+}
+
+.stat-item span {
+  font-size: 0.9rem;
+  color: #777;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* =========================================
+   5. SERVICES SECTION
+   ========================================= */
+.services {
+  padding: 80px 0;
+}
+
+.services-grid {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.service-card {
+  background-color: var(--card-dark);
+  color: var(--text-light);
+  padding: 40px 25px;
+  border-radius: 15px;
+  width: 260px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+}
+
+.service-card h3 {
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  color: var(--accent-color);
+}
+
+.service-card p {
+  font-size: 0.9rem;
+  color: #ddd;
+  line-height: 1.5;
+}
+
+/* =========================================
+   6. DESTINATIONS SECTION
+   ========================================= */
+.destinations {
+  padding: 40px 0 80px 0;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.destination-card {
+  position: relative;
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+
+.destination-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.destination-card:hover img {
+  transform: scale(1.1);
+}
+
+.destination-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.destination-card:hover .destination-overlay {
+  opacity: 1;
+}
+
+.destination-overlay h3 {
+  color: var(--text-light);
+  margin-bottom: 5px;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.destination-overlay p {
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transform: translateY(20px);
+  transition: transform 0.3s ease 0.1s;
+}
+
+.destination-card:hover h3,
+.destination-card:hover p {
+  transform: translateY(0);
+}
+
+/* =========================================
+   7. TESTIMONIALS SECTION
+   ========================================= */
+.testimonials {
+  padding: 80px 0;
+  background-color: white;
+}
+
+.testimonial-grid {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.testimonial-card {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  text-align: center;
+  border-top: 4px solid var(--primary-color);
+}
+
+/* =========================================
+   8. AUTH PAGES (Login / Register)
+   ========================================= */
+.auth-container {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2C2C2C; 
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+.auth-card {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.auth-card h2 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.auth-card p {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+.form-group input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.auth-btn {
+  width: 100%;
+  margin-top: 10px;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.auth-btn:hover {
+  background-color: #6d1731;
+}
+
+.auth-footer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.auth-footer a {
+  color: var(--primary-color);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   9. FOOTER
+   ========================================= */
+.footer {
+  background-color: var(--footer-bg);
+  color: var(--text-light);
+  padding: 60px 0;
+  font-size: 0.95rem;
+  border-top: 4px solid var(--accent-color);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-section h4 {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+}
+
+.footer-section p {
+  margin-bottom: 10px;
+  color: #bbb;
+}
+
+/* =========================================
+   10. RESPONSIVE DESIGN
+   ========================================= */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-content {
+    flex-direction: column;
+  }
+  
+  .about-image img {
+    box-shadow: 10px 10px 0px var(--accent-color);
+  }
+
+  /* Simple mobile menu logic required to toggle this properly */
+  .nav-links {
+    display: none; 
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+}
